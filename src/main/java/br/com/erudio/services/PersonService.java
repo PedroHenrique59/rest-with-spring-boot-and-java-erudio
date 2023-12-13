@@ -1,35 +1,50 @@
 package br.com.erudio.services;
 
+import br.com.erudio.exceptions.ResourceNotFoundException;
 import br.com.erudio.model.Person;
+import br.com.erudio.repositories.PersonRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 import java.util.logging.Logger;
 
 @Service
 public class PersonService {
 
-    private final AtomicLong counter = new AtomicLong();
     private Logger logger = Logger.getLogger(PersonService.class.getName());
 
-    public Person findById(String id) {
-        return new Person();
-    }
+    @Autowired
+    private PersonRepository personRepository;
 
     public List<Person> findAll() {
-        List<Person> persons = new ArrayList<>();
-        return persons;
+        return personRepository.findAll();
+    }
+
+    public Person findById(Long id) {
+        return personRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
     }
 
     public Person create(Person person) {
-        Person person1 = new Person();
-        person1.setId(person.getId());
-        person1.setAdress(person.getAdress());
-        person1.setFirstName(person.getFirstName());
-        person1.setLastName(person.getLastName());
-        person1.setGender(person.getGender());
-        return person1;
+        return personRepository.save(person);
     }
+
+    public Person update(Person person) {
+        Person entity = personRepository.findById(person.getId()).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
+
+        entity.setAddress(person.getAddress());
+        entity.setGender(person.getGender());
+        entity.setFirstName(person.getFirstName());
+        entity.setLastName(person.getLastName());
+
+        return personRepository.save(entity);
+    }
+
+    public void delete(Long id) {
+        Person entity = personRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
+
+        personRepository.delete(entity);
+    }
+
 }

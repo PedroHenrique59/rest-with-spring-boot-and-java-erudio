@@ -1,6 +1,7 @@
 package br.com.erudio.controllers;
 
-import br.com.erudio.model.Person;
+import br.com.erudio.data.vo.v1.PersonVO;
+import br.com.erudio.data.vo.v2.PersonVOV2;
 import br.com.erudio.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -19,7 +20,7 @@ public class PersonController {
     @GetMapping(
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public List<Person> findAll() {
+    public List<PersonVO> findAll() {
         return personService.findAll();
     }
 
@@ -27,7 +28,7 @@ public class PersonController {
             value = "/{id}",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public Person findById(@PathVariable(value = "id") Long id) {
+    public PersonVO findById(@PathVariable(value = "id") Long id) {
         return personService.findById(id);
     }
 
@@ -35,16 +36,25 @@ public class PersonController {
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    public Person create(@RequestBody Person person) {
-        return personService.create(person);
+    public PersonVO create(@RequestBody PersonVO personVO) {
+        return personService.create(personVO);
+    }
+
+    @PostMapping(
+            value = "/v2",
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE
+    )
+    public PersonVOV2 createV2(@RequestBody PersonVOV2 personVOV2) {
+        return personService.createV2(personVOV2);
     }
 
     @PutMapping(
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    public Person update(@RequestBody Person person) {
-        return personService.update(person);
+    public PersonVO update(@RequestBody PersonVO personVO) {
+        return personService.update(personVO);
     }
 
     @DeleteMapping(

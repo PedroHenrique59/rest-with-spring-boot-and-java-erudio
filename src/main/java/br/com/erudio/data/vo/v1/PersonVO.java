@@ -11,6 +11,7 @@ import java.util.Objects;
 @JsonPropertyOrder({"id", "address", "first_name", "last_name", "gender"})
 public class PersonVO extends RepresentationModel<PersonVO> implements Serializable {
 
+    @JsonProperty("id")
     @Mapping("id")
     private Long key;
 

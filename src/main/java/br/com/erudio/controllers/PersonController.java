@@ -18,7 +18,7 @@ public class PersonController {
     private PersonService personService;
 
     @GetMapping(
-            produces = MediaType.APPLICATION_JSON_VALUE
+            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
     )
     public List<PersonVO> findAll() {
         return personService.findAll();
@@ -26,15 +26,15 @@ public class PersonController {
 
     @GetMapping(
             value = "/{id}",
-            produces = MediaType.APPLICATION_JSON_VALUE
+            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
     )
     public PersonVO findById(@PathVariable(value = "id") Long id) {
         return personService.findById(id);
     }
 
     @PostMapping(
-            produces = MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.APPLICATION_JSON_VALUE
+            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
+            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
     )
     public PersonVO create(@RequestBody PersonVO personVO) {
         return personService.create(personVO);
@@ -42,16 +42,16 @@ public class PersonController {
 
     @PostMapping(
             value = "/v2",
-            produces = MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.APPLICATION_JSON_VALUE
+            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
+            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
     )
     public PersonVOV2 createV2(@RequestBody PersonVOV2 personVOV2) {
         return personService.createV2(personVOV2);
     }
 
     @PutMapping(
-            produces = MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.APPLICATION_JSON_VALUE
+            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
+            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
     )
     public PersonVO update(@RequestBody PersonVO personVO) {
         return personService.update(personVO);

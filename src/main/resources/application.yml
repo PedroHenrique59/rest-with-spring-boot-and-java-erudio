@@ -1,3 +1,6 @@
+cors:
+  originPatternss: http://localhost:3000,http://localhost:8080,https://erudio.com.br
+
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -9,7 +12,7 @@ spring:
     hibernate:
       ddl-auto: none
         # properties:
-        # hibernate:
+      # hibernate:
       # dialect: org.hibernate.dialect.MySQLDialect
     show-sql: false
     open-in-view: false
@@ -21,3 +24,5 @@ springdoc:
 
 server:
   port: 8081
+  compression:
+    min-response-size:

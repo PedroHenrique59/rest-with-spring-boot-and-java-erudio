@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+//@CrossOrigin -> Permitir de forma geral o acesso
 @RestController
 @RequestMapping("/api/person/v1")
 @Tag(name = "People", description = "Endpoints for Managing People")
@@ -45,6 +46,7 @@ public class PersonController {
         return personService.findAll();
     }
 
+    @CrossOrigin(origins = "http://localhost:8081")
     @GetMapping(
             value = "/{id}",
             produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML}
@@ -65,6 +67,7 @@ public class PersonController {
         return personService.findById(id);
     }
 
+    @CrossOrigin(origins = {"http://localhost:8081", "https://erudio.com.br"})
     @PostMapping(
             produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML},
             consumes = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML}

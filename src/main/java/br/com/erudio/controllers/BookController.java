@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.erudio.data.vo.v1.BookVO;
-import br.com.erudio.services.BookServices;
+import br.com.erudio.services.BookService;
 import br.com.erudio.util.MediaType;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -29,7 +29,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 public class BookController {
 	
 	@Autowired
-	private BookServices service;
+	private BookService service;
 	
 	@GetMapping(
 		produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML })

@@ -21,16 +21,16 @@ import br.com.erudio.data.vo.v1.BookVO;
 import br.com.erudio.exceptions.RequiredObjectIsNullException;
 import br.com.erudio.model.Book;
 import br.com.erudio.repositories.BookRepository;
-import br.com.erudio.services.BookServices;
+import br.com.erudio.services.BookService;
 
 @TestInstance(Lifecycle.PER_CLASS)
 @ExtendWith(MockitoExtension.class)
-class BookServicesTest {
+class BookServiceTest {
 
 	MockBook input;
 	
 	@InjectMocks
-	private BookServices service;
+	private BookService service;
 	
 	@Mock
 	BookRepository repository;

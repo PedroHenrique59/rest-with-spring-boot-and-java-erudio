@@ -1,6 +1,5 @@
 package br.com.erudio.security.jwt;
 
-import br.com.erudio.exceptions.InvalidJwtAuthenticationException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
@@ -16,27 +15,26 @@ import java.io.IOException;
 public class JwtTokenFilter extends GenericFilterBean {
 
     @Autowired
-    private JwtTokenProvider jwtTokenProvider;
+    private JwtTokenProvider tokenProvider;
 
     public JwtTokenFilter(JwtTokenProvider jwtTokenProvider) {
-        this.jwtTokenProvider = jwtTokenProvider;
+        this.tokenProvider = jwtTokenProvider;
     }
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        String token = jwtTokenProvider.resolveToken((HttpServletRequest) request);
-
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+            throws IOException, ServletException {
+        String token = tokenProvider.resolveToken((HttpServletRequest) request);
         try {
-            if (token != null && jwtTokenProvider.validateToken(token)) {
-                Authentication auth = jwtTokenProvider.getAuthentication(token);
+            if (token != null && tokenProvider.validateToken(token)) {
+                Authentication auth = tokenProvider.getAuthentication(token);
                 if (auth != null) {
                     SecurityContextHolder.getContext().setAuthentication(auth);
                 }
             }
-        } catch (InvalidJwtAuthenticationException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
         chain.doFilter(request, response);
     }
 }

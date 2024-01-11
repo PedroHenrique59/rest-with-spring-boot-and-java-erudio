@@ -1,11 +1,11 @@
 package br.com.erudio.integrationtests.vo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
 import java.io.Serializable;
 import java.util.Objects;
-
 
 @XmlRootElement
 public class PersonVO implements Serializable {
@@ -13,9 +13,11 @@ public class PersonVO implements Serializable {
     private Long id;
 
     @JsonProperty("first_name")
+    @JacksonXmlProperty(localName = "first_name", isAttribute = true)
     private String firstName;
 
     @JsonProperty("last_name")
+    @JacksonXmlProperty(localName = "last_name", isAttribute = true)
     private String lastName;
 
     private String address;

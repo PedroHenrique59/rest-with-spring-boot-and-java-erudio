@@ -1,7 +1,8 @@
-package br.com.erudio.integrationtests.vo;
+package br.com.erudio.integrationtests.vo.wrappers;
 
 import java.io.Serializable;
 
+import br.com.erudio.integrationtests.vo.PersonEmbeddedVO;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.xml.bind.annotation.XmlRootElement;

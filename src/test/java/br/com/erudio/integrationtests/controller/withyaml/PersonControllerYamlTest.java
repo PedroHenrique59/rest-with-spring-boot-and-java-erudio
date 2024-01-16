@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import br.com.erudio.integrationtests.vo.WrapperPersonVO;
+import br.com.erudio.integrationtests.vo.pagedmodels.PagedModelPerson;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
@@ -289,15 +290,16 @@ public class PersonControllerYamlTest extends AbstractIntegrationTest {
                                                 ContentType.TEXT)))
                 .contentType(TestConfigs.CONTENT_TYPE_YML)
                 .accept(TestConfigs.CONTENT_TYPE_YML)
+                .queryParams("page", 3, "size", 10, "direction", "asc")
                 .when()
                 .get()
                 .then()
                 .statusCode(200)
                 .extract()
                 .body()
-                .as(WrapperPersonVO.class, objectMapper);
+                .as(PagedModelPerson.class, objectMapper);
 
-        var people = wrapper.getEmbedded().getPersons();
+        var people = wrapper.getContent();
 
         PersonVO foundPersonOne = people.get(0);
 
@@ -308,7 +310,11 @@ public class PersonControllerYamlTest extends AbstractIntegrationTest {
         assertNotNull(foundPersonOne.getGender());
         assertTrue(foundPersonOne.getEnabled());
 
-        assertEquals(1, foundPersonOne.getId());
+        assertEquals(668, foundPersonOne.getId());
+        assertEquals("Alic", foundPersonOne.getFirstName());
+        assertEquals("Terbrug", foundPersonOne.getLastName());
+        assertEquals("3 Eagle Crest Court", foundPersonOne.getAddress());
+        assertEquals("Male", foundPersonOne.getGender());
     }
 
 

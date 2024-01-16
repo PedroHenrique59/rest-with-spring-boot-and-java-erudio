@@ -228,6 +228,7 @@ class PersonControllerJsonTest extends AbstractIntegrationTest {
 
         var content = given().spec(specification)
                 .contentType(TestConfigs.CONTENT_TYPE_JSON)
+                .queryParams("page", 3, "size", 10, "direction", "asc")
                 .when()
                 .get()
                 .then()
@@ -248,7 +249,11 @@ class PersonControllerJsonTest extends AbstractIntegrationTest {
         assertNotNull(foundPersonOne.getGender());
         assertTrue(foundPersonOne.getEnabled());
 
-        assertEquals(1, foundPersonOne.getId());
+        assertEquals(668, foundPersonOne.getId());
+        assertEquals("Alic", foundPersonOne.getFirstName());
+        assertEquals("Terbrug", foundPersonOne.getLastName());
+        assertEquals("3 Eagle Crest Court", foundPersonOne.getAddress());
+        assertEquals("Male", foundPersonOne.getGender());
     }
 
 

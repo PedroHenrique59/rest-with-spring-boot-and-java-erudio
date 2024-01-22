@@ -22,6 +22,12 @@ spring:
       # dialect: org.hibernate.dialect.MySQLDialect
     show-sql: false
     open-in-view: false
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2KB
+      max-file-size: 200MB
+      max-request-size: 215MB
 
 springdoc:
   paths-to-match:
@@ -32,5 +38,6 @@ springdoc:
 
 server:
   port: 8081
-  compression:
-    min-response-size:
+
+file:
+  upload-dir: /Users/Pedro/Desktop/Estudo/Projetos/rest-with-spring-boot-and-java-erudio-upload-arquivos

@@ -37,7 +37,7 @@ springdoc:
     use-root-path: true
 
 server:
-  port: 8081
+  port: 80
 
 file:
   upload-dir: /Users/Pedro/Desktop/Estudo/Projetos/rest-with-spring-boot-and-java-erudio-upload-arquivos

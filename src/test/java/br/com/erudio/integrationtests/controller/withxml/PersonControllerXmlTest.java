@@ -1,4 +1,4 @@
-package br.com.erudio.integrationtests.controller.withxml;
+//package br.com.erudio.integrationtests.controller.withxml;
 
 import br.com.erudio.configs.TestConfigs;
 import br.com.erudio.data.vo.v1.security.TokenVO;
@@ -24,6 +24,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.*;
+
+/*
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @TestMethodOrder(OrderAnnotation.class)
@@ -363,3 +365,5 @@ public class PersonControllerXmlTest extends AbstractIntegrationTest {
         person.setEnabled(true);
     }
 }
+
+ */

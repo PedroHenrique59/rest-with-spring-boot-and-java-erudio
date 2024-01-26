@@ -36,4 +36,4 @@ server:
   port: 8888
 
 file:
-  upload-dir: /Users/Pedro/Desktop/Estudo/Projetos/rest-with-spring-boot-and-java-erudio-upload-arquivos
+  upload-dir: /home/runner/work/rest-with-spring-boot-and-java-erudio/Users/Pedro/Desktop/Estudo/Projetos/rest-with-spring-boot-and-java-erudio-upload-arquivos

@@ -17,7 +17,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
-        # properties:
+      # properties:
       # hibernate:
       # dialect: org.hibernate.dialect.MySQLDialect
     show-sql: false

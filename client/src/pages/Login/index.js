@@ -17,7 +17,6 @@ export default function Login() {
                 </form>
             </section>
             <img src={padlock} alt='Login'/>
-
         </div>
     );
 }

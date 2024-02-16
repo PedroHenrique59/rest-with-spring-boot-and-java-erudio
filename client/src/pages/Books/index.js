@@ -5,7 +5,7 @@ import { FiPower, FiEdit, FiTrash2 } from 'react-icons/fi';
 import './style.css';
 import logo from '../../assets/logo.svg'
 
-export default function Book() {
+export default function Books() {
 
     return (
         <div className="book-container">

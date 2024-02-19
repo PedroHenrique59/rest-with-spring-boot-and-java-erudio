@@ -27,9 +27,6 @@ export default function Login() {
             localStorage.setItem('username', username);
             localStorage.setItem('accessToken', response.data.accessToken);
 
-            alert('Token: ' + localStorage.getItem('accessToken'));
-            alert('Token: ' + response.status);
-
             navigate('/books');
             
         }catch (err){

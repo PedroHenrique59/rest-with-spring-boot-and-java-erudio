@@ -10,6 +10,7 @@ import logo from '../../assets/logo.svg'
 export default function Books() {
 
     const [books, setBooks] = useState([]);
+    const [page, setPage] = useState(1);
 
     const username = localStorage.getItem('username');
     const accessToken = localStorage.getItem('accessToken');
@@ -45,7 +46,30 @@ export default function Books() {
         }
     }
 
+    async function fetchMoreBooks(){
+
+        const response = await api.get('api/book/v1', {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            },
+            params: {
+                page: page,
+                size: 2,
+                direction: 'asc'
+            }
+        });
+        
+        if(!response.data._embedded) return;
+
+        setBooks([ ...books, ...response.data._embedded.bookVOList])
+        setPage(page + 1);
+    }
+
     useEffect(() => {
+        fetchMoreBooks();
+    }, [])
+    
+    /*
         api.get('api/book/v1', {
             headers: {
                 Authorization: `Bearer ${accessToken}`
@@ -59,6 +83,7 @@ export default function Books() {
             setBooks(response.data._embedded.bookVOList)
         })
     }, []);
+    */
 
     return (
         <div className="book-container">
@@ -94,6 +119,9 @@ export default function Books() {
                     </li>
                 ))}
             </ul>
+
+            <button className="button" type="button" onClick={fetchMoreBooks}>Load More</button>            
+
         </div>
     );
 

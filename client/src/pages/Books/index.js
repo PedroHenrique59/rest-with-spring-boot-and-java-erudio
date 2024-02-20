@@ -21,6 +21,15 @@ export default function Books() {
         navigate('/')
     }
 
+    async function editBook(id){
+        try{
+            navigate(`/book/new/${id}`)
+
+        }catch (err) {
+            alert('Edit book failed! Try again.')
+        }
+    }
+
     async function deleteBook(id){
         try{
             await api.delete(`api/book/v1/${id}`, {
@@ -49,14 +58,14 @@ export default function Books() {
         }).then(response => {
             setBooks(response.data._embedded.bookVOList)
         })
-    });
+    }, []);
 
     return (
         <div className="book-container">
             <header>
                 <img src={logo} alt="Erudio" />
                 <span>Welcome, <strong>{username.toUpperCase()}</strong>!</span>
-                <Link className="button" to="/book/new">Add New Book</Link>
+                <Link className="button" to="/book/new/0">Add New Book</Link>
                 <button type="button" onClick={logout}>
                     <FiPower size={18} color="#251FC5"></FiPower>
                 </button>
@@ -74,7 +83,7 @@ export default function Books() {
                         <strong>Release Date:</strong>
                         <p>{Intl.DateTimeFormat('pt-BR').format(new Date(book.launchDate))}</p>
 
-                        <button type="button">
+                        <button type="button" onClick={() => editBook(book.id)}>
                             <FiEdit size={20} color="#251FC5" />
                         </button>
 

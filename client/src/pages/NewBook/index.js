@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {useNavigate, Link} from 'react-router-dom';
+import React, {useState, useEffect} from 'react';
+import {useNavigate, Link, useParams} from 'react-router-dom';
 
 import api from '../../services/api';
 
@@ -16,6 +16,7 @@ export default function NewBook(){
     const [title, setTitle] = useState('');  
 
     const navigate = useNavigate();
+    const {bookId} = useParams();
 
     const username = localStorage.getItem('username');
     const accessToken = localStorage.getItem('accessToken');
@@ -42,7 +43,34 @@ export default function NewBook(){
         }
 
     }
-    
+
+    async function loadBook() {
+        try{        
+            const response = await api.get(`api/book/v1/${bookId}`, {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`
+                }
+            });
+            
+            let adjustedDate = response.data.launchDate.split('T', 10)[0];
+                
+            setId(response.data.id)
+            setAuthor(response.data.author)
+            setLaunchDate(adjustedDate)
+            setPrice(response.data.price)
+            setTitle(response.data.title) 
+               
+        }catch(err){
+            alert('Error recovering Book! Try again')
+            navigate('/books')
+        }
+    }
+
+    useEffect(() => {
+        if(bookId === '0') return;
+        else loadBook();
+    }, [bookId])
+
     return (
         <div className="new-book-container">
             <div className="content">
